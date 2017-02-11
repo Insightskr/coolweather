@@ -2,4 +2,13 @@
     <string name="app_name">Coolweather</string>
     <string name="china">中国</string>
     <string name="loading">正在加载……</string>
+    <string name="forecast">预报</string>
+    <string name="aqi">空气质量</string>
+    <string name="aqiNum">AQI指数</string>
+    <string name="pm2_5">PM2.5指数</string>
+    <string name="lifeTips">生活建议</string>
+    <string name="dC">℃</string>
+    <string name="comfort">舒适度：</string>
+    <string name="carWash">洗车指数：</string>
+    <string name="sport">运动建议：</string>
 </resources>
