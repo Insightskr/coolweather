@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Coolweather</string>
+    <string name="app_name">天气</string>
     <string name="china">中国</string>
     <string name="loading">正在加载……</string>
     <string name="forecast">预报</string>
