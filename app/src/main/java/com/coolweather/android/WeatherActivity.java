@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,7 +31,6 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -41,6 +41,8 @@ public class WeatherActivity extends AppCompatActivity {
     Button navButton;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
     private String mWeatherId;
 
     @BindView(R.id.title_city)
@@ -91,7 +93,7 @@ public class WeatherActivity extends AppCompatActivity {
             Weather weather = Utility.handleWeatherResponse(weatherString);
             mWeatherId = weather.basic.weatherId;
             showWeatherInfo(weather);
-            Intent intent=new Intent(this, AutoUpdateService.class);
+            Intent intent = new Intent(this, AutoUpdateService.class);
             startService(intent);
         } else {
             //无缓存时去服务器查询数据
@@ -111,8 +113,20 @@ public class WeatherActivity extends AppCompatActivity {
         }
 
         //设置导航栏按钮
-        navButton.setOnClickListener((v)->{
+        navButton.setOnClickListener((v) -> {
             drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        //设置滑动菜单功能
+        navView.setCheckedItem(R.id.nav_location);
+        navView.setNavigationItemSelectedListener((item)->{
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
+            editor.putString("weather", null);
+            editor.apply();
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
         });
     }
 
@@ -214,7 +228,6 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.nav_button)
-    public void onClick() {
-    }
+
+
 }
